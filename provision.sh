@@ -9,7 +9,7 @@
 PROJECT_ROOT="vagrant"
 
 # Create new project directory in sites/
-PROJECT_VHOST_DIR="develop.vagrant.dev"
+PROJECT_VHOST_DIR="phoenix.vagrant.dev"
 if [[ ! -d /vagrant/sites/$PROJECT_VHOST_DIR ]]; then
 	mkdir -pv /vagrant/sites/$PROJECT_VHOST_DIR
 	cp /vagrant/sites/phpinfo.php /vagrant/sites/$PROJECT_VHOST_DIR/index.php
@@ -74,7 +74,7 @@ yum -y install http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-cent
 
 # Install all software needed for machine
 echo "Installing base software."
-PHP_VERSION="php56u"
+PHP_VERSION="php70u"
 
 # Smaller footprint. 66M downloaded.
 yum -y groupinstall "Development Tools"
@@ -84,17 +84,19 @@ yum -y install \
 yum-utils yum-plugin-replace \
 vim vim-common vim-enhanced vim-minimal htop mytop nmap at wget \
 openssl openssl-devel curl libcurl libcurl-devel lsof tmux bash-completion \
-gpg lynx memcached memcached-devel nginx npm pv parted ca-certificates \
+gpg lynx memcached memcached-devel nginx pv parted ca-certificates \
 setroubleshoot atop autofs bind-utils tuned cachefilesd symlinks \
 $PHP_VERSION \
 $PHP_VERSION-devel $PHP_VERSION-common $PHP_VERSION-gd $PHP_VERSION-imap \
 $PHP_VERSION-mbstring $PHP_VERSION-mcrypt $PHP_VERSION-mhash \
-$PHP_VERSION-mysql $PHP_VERSION-pear $PHP_VERSION-pecl-memcached \
+$PHP_VERSION-pdo_mysql $PHP_VERSION-pear $PHP_VERSION-pecl-memcached \
 $PHP_VERSION-pecl-memcached-debuginfo $PHP_VERSION-pecl-xdebug \
 $PHP_VERSION-xml $PHP_VERSION-pdo $PHP_VERSION-fpm $PHP_VERSION-opcache \
 $PHP_VERSION-cli $PHP_VERSION-pecl-jsonc $PHP_VERSION-devel \
 $PHP_VERSION-pecl-geoip $PHP_VERSION-pecl-redis \
-$PHP_VERSION-pecl-mongo mongodb mongodb-server \
+$PHP_VERSION-pecl-mongo $PHP_VERSION-json $PHP_VERSION-intl \
+$PHP_VERSION-soap \
+mongodb mongodb-server \
 $PHP_VERSION-ioncube-loader \
 Percona-Server-client-56 Percona-Server-server-56 \
 percona-toolkit percona-xtrabackup mysql-utilities mysqlreport mysqltuner \
@@ -149,7 +151,7 @@ sed -i -e 's/SELINUX=permissive/SELINUX=disabled/g' /etc/sysconfig/selinux
 # Installing PHP composer...
 echo "Installing Composer."
 curl -sS https://getcomposer.org/installer | php
-mv composer.phar /usr/local/bin/composer
+sudo mv composer.phar /usr/local/bin/composer
 
 # SSH
 echo -e "Copying Vagrant SSH keys."
@@ -171,12 +173,12 @@ chmod 700 /home/$USER_USER/.ssh
 chmod 600 /home/$USER_USER/.ssh/*
 
 # Installing PECL Scrypt extension for PHP...
-echo "Installing PECL Scrypt extension for PHP."
-pecl install scrypt
+# echo "Installing PECL Scrypt extension for PHP."
+# pecl install scrypt
 
 # Installing PECL Http 1.7.6 extension for PHP...
-echo "Installing PECL Http 1.7.6 extension for PHP."
-pecl install http://pecl.php.net/get/pecl_http-1.7.6.tgz
+# echo "Installing PECL Http extension for PHP."
+# pecl install http://pecl.php.net/get/pecl_http-1.7.6.tgz
 
 # Tuning
 tuned-adm profile latency-performance
