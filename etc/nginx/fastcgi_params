@@ -24,7 +24,7 @@ fastcgi_param  REDIRECT_STATUS    200;
 
 # Additional
 #fastcgi_split_path_info ^(.+\.php)(.*)$;
-fastcgi_index  index.php;
+#fastcgi_index  index.php;
 fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
 # See 75f034c which resolved gloves issue.
 #fastcgi_intercept_errors  on;
@@ -32,7 +32,7 @@ fastcgi_ignore_client_abort off;
 # If Nginx cannot initially connect to PHP-FPM in this time, time out.
 # Defines a timeout for establishing a connection with a FastCGI server. It
 # should be noted that this timeout cannot usually exceed 75 seconds.
-fastcgi_connect_timeout 30;
+# fastcgi_connect_timeout 30;
 # How long nginx can send data to FPM.
 #fastcgi_send_timeout 4;
 fastcgi_send_timeout 400;
@@ -41,7 +41,7 @@ fastcgi_send_timeout 400;
 # Regular pages: 2
 # Product pages: 12 with 300 concurrency
 # Product listings: 19 with 300 concurrency
-fastcgi_read_timeout 42;
+#fastcgi_read_timeout 42;
 # Never turn this on. Concurrency and throughput drop significantly.
 fastcgi_keep_conn off;
 
