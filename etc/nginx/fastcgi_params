@@ -53,5 +53,5 @@ fastcgi_temp_file_write_size 256k;
 fastcgi_busy_buffers_size 256k;
 
 #Magento
-fastcgi_param MAGE_RUN_CODE default; # Store code is defined in administration > Configuration > Manage Stores
+fastcgi_param MAGE_RUN_CODE en; # Store code is defined in administration > Configuration > Manage Stores
 fastcgi_param MAGE_RUN_TYPE store;
