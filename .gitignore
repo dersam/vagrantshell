@@ -39,3 +39,5 @@ post-provision/*
 # so that vagrantshell can be updated without conflicts.
 sites/*
 !sites/phpinfo.php
+
+linus/
