@@ -19,6 +19,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 		vagrantshell.vm.hostname = "phoenix"
 		vagrantshell.vm.network :private_network, ip: "192.168.70.70"
+		# MySQL
+		vagrantshell.vm.network "forwarded_port", guest: 3306, host: 3306
+		# Elasticsearch
+		vagrantshell.vm.network "forwarded_port", guest: 9200, host: 9200
+		# Kibana
+		vagrantshell.vm.network "forwarded_port", guest: 5601, host: 5601
 		#vagrantshell.vm.network "forwarded_port", guest: 22, host: 4444, id: "ssh", auto_correct: true
 		#vagrantshell.vm.network "forwarded_port", guest: 2368, host: 2368, auto_correct: true
 		#vagrantshell.vm.network "forwarded_port", guest: 6081, host: 6081, auto_correct: true
