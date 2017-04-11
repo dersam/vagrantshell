@@ -80,6 +80,8 @@ will be used, then fallback to VirtualBox. Parallels is faster, but not free.
 - MongoDB
 - Varnish 3.0+
 - Node.js
+- Elasticsearch
+- Kibana
 
 ### Minor
 
