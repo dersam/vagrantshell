@@ -223,6 +223,7 @@ echo -e "Updating rsync."
 yum -y replace rsync --replace-with rsync31u
 
 # Install Elasticsearch and Kibana
+# Kibana not technically necessary, nice for viewing indices and figuring out config issues.
 # TODO: Setup up connection to legacy rpm repos (ES is at 5 currently)
 yum install java
 wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.4.4/elasticsearch-2.4.4.rpm -P /tmp
