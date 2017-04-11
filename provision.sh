@@ -222,6 +222,23 @@ yum -y replace git --replace-with git2u
 echo -e "Updating rsync."
 yum -y replace rsync --replace-with rsync31u
 
+# Install Elasticsearch and Kibana
+# TODO: Setup up connection to legacy rpm repos (ES is at 5 currently)
+yum install java
+wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.4.4/elasticsearch-2.4.4.rpm -P /tmp
+wget https://download.elastic.co/kibana/kibana/kibana-4.6.4-x86_64.rpm -P /tmp
+sudo rpm --install elasticsearch-2.4.4.rpm
+sudo rpm --install kibana-4.6.4-x86_64.rpm
+
+echo "script.inline: on" >> /etc/elasticsearch/elasticsearch.yml
+echo "script.indexed: on" >> /etc/elasticsearch/elasticsearch.yml
+echo "network.host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
+
+chkconfig elasticsearch on
+service elasticsearch start
+chkconfig kibana on
+service kibana start
+
 # Symlink vshell utility into PATH for root and vagrant users.
 echo -e "Add vshell utility to PATH."
 if [[ ! -d "$HOME/bin" ]]; then
