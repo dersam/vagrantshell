@@ -228,8 +228,8 @@ yum -y replace rsync --replace-with rsync31u
 yum install java
 wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.4.4/elasticsearch-2.4.4.rpm -P /tmp
 wget https://download.elastic.co/kibana/kibana/kibana-4.6.4-x86_64.rpm -P /tmp
-sudo rpm --install elasticsearch-2.4.4.rpm
-sudo rpm --install kibana-4.6.4-x86_64.rpm
+rpm --install elasticsearch-2.4.4.rpm
+rpm --install kibana-4.6.4-x86_64.rpm
 
 echo "script.inline: on" >> /etc/elasticsearch/elasticsearch.yml
 echo "script.indexed: on" >> /etc/elasticsearch/elasticsearch.yml
