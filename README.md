@@ -270,14 +270,15 @@ box. Unless very custom server configurations are required, the defaults are
 plenty. However, this Vagrant box has been configured to easily allow such
 customizations.
 
-### Magento
+### Magento 2
 
-This box is [Magento](http://www.magentocommerce.com/download)-friendly. The
+This box is [Magento 2](http://www.magentocommerce.com/download)-friendly. The
 proper variables and rewrites are included for Magento development. This does
 not mean only Magento can be developed on this box. The Magento settings do not
-change any other type of development. Magento version 1.9+ has been tested.
-Downgrading the version of PHP to 5.4 or 5.3 will increase compatibility for
-older releases of Magento.
+change any other type of development. Magento version 2.1+ has been tested.
+
+As the box is based around PHP7, Magento 1 is currently not compatible. Use
+vagrantshell 2.0.
 
 ### Ghost (Node.js)
 
@@ -307,6 +308,12 @@ policy to reactivate. This blocks Nginx from being accessible. Since CentOS 6.6
 [Dane MacMillan](https://danemacmillan.com)
 
 ## Changelog
+
+### 3.0.0 (2017)
+
+The provisioners were updated to use PHP7, and all Magento configs updated for
+support of Magento 2. This breaks compatibility with Magento 1, but other systems
+should be fine. Elasticsearch and Kibana were added to the stack.
 
 ### 2.0.0 (October 2, 2015)
 
