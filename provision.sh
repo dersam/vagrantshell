@@ -235,6 +235,9 @@ echo "script.inline: on" >> /etc/elasticsearch/elasticsearch.yml
 echo "script.indexed: on" >> /etc/elasticsearch/elasticsearch.yml
 echo "network.host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
 
+/usr/share/elasticsearch/bin/plugin install analysis-phonetic
+/usr/share/elasticsearch/bin/plugin install analysis-icu
+
 chkconfig elasticsearch on
 service elasticsearch start
 chkconfig kibana on
