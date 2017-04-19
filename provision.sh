@@ -234,6 +234,7 @@ rpm --install /tmp/kibana-4.6.4-x86_64.rpm
 echo "script.inline: on" >> /etc/elasticsearch/elasticsearch.yml
 echo "script.indexed: on" >> /etc/elasticsearch/elasticsearch.yml
 echo "network.host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
+echo "path.repo: /vagrant/snapshot"
 
 /usr/share/elasticsearch/bin/plugin install analysis-phonetic
 /usr/share/elasticsearch/bin/plugin install analysis-icu
@@ -242,6 +243,18 @@ chkconfig elasticsearch on
 service elasticsearch start
 chkconfig kibana on
 service kibana start
+
+# Create snapshot directory.
+mkdir /vagrant/snapshots
+
+# Initialize elasticsearch snapshot repo.
+curl -XPUT "http://localhost:9200/_snapshot/magento2" -d'
+{
+  "type": "fs",
+  "settings": {
+    "location": "/vagrant/snapshots/magento2"
+  }
+}'
 
 # Symlink vshell utility into PATH for root and vagrant users.
 echo -e "Add vshell utility to PATH."
