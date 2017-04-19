@@ -239,6 +239,8 @@ echo "path.repo: /vagrant/snapshot"
 /usr/share/elasticsearch/bin/plugin install analysis-phonetic
 /usr/share/elasticsearch/bin/plugin install analysis-icu
 
+/opt/kibana/bin/kibana plugin --install elastic/sense
+
 chkconfig elasticsearch on
 service elasticsearch start
 chkconfig kibana on
