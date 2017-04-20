@@ -25,6 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		vagrantshell.vm.network "forwarded_port", guest: 9200, host: 9200
 		# Kibana
 		vagrantshell.vm.network "forwarded_port", guest: 5601, host: 5601
+		vagrantshell.vm.network "forwarded_port", guest: 6379, host: 6379
 		#vagrantshell.vm.network "forwarded_port", guest: 22, host: 4444, id: "ssh", auto_correct: true
 		#vagrantshell.vm.network "forwarded_port", guest: 2368, host: 2368, auto_correct: true
 		#vagrantshell.vm.network "forwarded_port", guest: 6081, host: 6081, auto_correct: true
