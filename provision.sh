@@ -243,11 +243,14 @@ echo "path.repo: /vagrant/snapshots" >> /etc/elasticsearch/elasticsearch.yml
 
 chkconfig elasticsearch on
 service elasticsearch start
-chkconfig kibana on
-service kibana start
+#chkconfig kibana on
+#service kibana start
 
 # Create snapshot directory.
 mkdir /vagrant/snapshots
+
+# Elasticsearch isn't always *quite* ready. Delay to avoid curl request failing.
+sleep 5
 
 # Initialize elasticsearch snapshot repo.
 curl -XPUT "http://localhost:9200/_snapshot/magento2" -d '{"type": "fs","settings": {"location": "/vagrant/snapshots/magento2"}}'
