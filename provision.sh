@@ -66,7 +66,7 @@ yum -y install epel-release
 yum -y install https://centos6.iuscommunity.org/ius-release.rpm
 yum -y install http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
 yum -y install http://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
-yum -y install https://repo.varnish-cache.org/redhat/varnish-3.0.el6.rpm
+yum -y install https://repo.varnish-cache.org/redhat/varnish-4.0.el6.rpm
 yum -y install http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
 
 # Switch to mainline Nginx version in repo file.
