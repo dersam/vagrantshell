@@ -306,6 +306,7 @@ policy to reactivate. This blocks Nginx from being accessible. Since CentOS 6.6
 ## Author
 
 [Dane MacMillan](https://danemacmillan.com)
+[Sam Schmidt](http://dersam.net)
 
 ## Changelog
 
