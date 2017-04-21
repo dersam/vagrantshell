@@ -312,8 +312,10 @@ policy to reactivate. This blocks Nginx from being accessible. Since CentOS 6.6
 ### 3.0.0 (2017)
 
 The provisioners were updated to use PHP7, and all Magento configs updated for
-support of Magento 2. This breaks compatibility with Magento 1, but other systems
-should be fine. Elasticsearch and Kibana were added to the stack.
+support of Magento 2. The box is currently in a state to only support Magento 2,
+so _TODO_: restore wildcard vhosts.
+
+Port forwarding for MySQL, Redis and Elasticsearch was added to allow access from the host OS.
 
 ### 2.0.0 (October 2, 2015)
 
