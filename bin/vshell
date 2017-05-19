@@ -70,6 +70,7 @@ vshell_restart()
 	#sudo /etc/init.d/sshd reload
 	#sudo /etc/init.d/network reload
 	#sudo /etc/init.d/iptables reload
+	sudo /etc/init.d/elasticsearch restart
 }
 
 vshell_update()
