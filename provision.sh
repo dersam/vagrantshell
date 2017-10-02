@@ -85,7 +85,7 @@ yum-utils yum-plugin-replace \
 vim vim-common vim-enhanced vim-minimal htop mytop nmap at wget \
 openssl openssl-devel curl libcurl libcurl-devel lsof tmux bash-completion \
 gpg lynx memcached memcached-devel nginx pv parted ca-certificates \
-setroubleshoot atop autofs bind-utils tuned cachefilesd symlinks \
+setroubleshoot atop autofs bind-utils tuned symlinks \
 $PHP_VERSION \
 $PHP_VERSION-devel $PHP_VERSION-common $PHP_VERSION-gd $PHP_VERSION-imap \
 $PHP_VERSION-mbstring $PHP_VERSION-mcrypt $PHP_VERSION-mhash \
@@ -181,10 +181,10 @@ chmod 600 /home/$USER_USER/.ssh/*
 # pecl install http://pecl.php.net/get/pecl_http-1.7.6.tgz
 
 # Tuning
-tuned-adm profile latency-performance
-cachefilesd -f /etc/cachefilesd.conf
-modprobe cachefiles
-service cachefilesd start
+#tuned-adm profile latency-performance
+#cachefilesd -f /etc/cachefilesd.conf
+#modprobe cachefiles
+#service cachefilesd start
 
 echo "Adding services to boot."
 chkconfig nginx on
@@ -194,7 +194,7 @@ chkconfig memcached on
 chkconfig redis on
 chkconfig iptables off
 chkconfig ip6tables off
-chkconfig cachefilesd on
+#chkconfig cachefilesd on
 chkconfig mongod on
 
 # Start services
