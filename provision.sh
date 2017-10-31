@@ -66,7 +66,7 @@ yum -y install epel-release
 yum -y install https://centos6.iuscommunity.org/ius-release.rpm
 yum -y install http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
 yum -y install http://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
-yum -y install https://repo.varnish-cache.org/redhat/varnish-4.0.el6.rpm
+#yum -y install https://repo.varnish-cache.org/redhat/varnish-4.0.el6.rpm
 yum -y install http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
 
 # Switch to mainline Nginx version in repo file.
@@ -100,12 +100,17 @@ mongodb mongodb-server \
 $PHP_VERSION-ioncube-loader \
 Percona-Server-client-56 Percona-Server-server-56 \
 percona-toolkit percona-xtrabackup mysql-utilities mysqlreport mysqltuner \
-varnish redis \
+redis \
 make patch wget mysql-devel pcre-devel \
 gd-devel libxml2-devel expat-devel libicu-devel bzip2-devel oniguruma-devel \
 openldap-devel readline-devel libc-client-devel libcap-devel binutils-devel \
 pam-devel elfutils-libelf-devel ImageMagick-devel libxslt-devel libevent-devel \
 libcurl-devel libmcrypt-devel tbb-devel libdwarf-devel
+
+# Install newer versions of python that can be executed directly. These will
+# not replace the system version of python, 2.6.6, which CentOS relies on
+# by default for tools like yum.
+yum -y install python27 python35u python27-pip python35u-pip
 
 # Latest version of Node.js
 curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
@@ -225,35 +230,35 @@ yum -y replace rsync --replace-with rsync31u
 # Install Elasticsearch and Kibana
 # Kibana not technically necessary, nice for viewing indices and figuring out config issues.
 # TODO: Setup up connection to legacy rpm repos (ES is at 5 currently)
-yum -y install java
-wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.4.4/elasticsearch-2.4.4.rpm -P /tmp
-wget https://download.elastic.co/kibana/kibana/kibana-4.6.4-x86_64.rpm -P /tmp
-rpm --install /tmp/elasticsearch-2.4.4.rpm
-rpm --install /tmp/kibana-4.6.4-x86_64.rpm
+#yum -y install java
+#wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.4.4/elasticsearch-2.4.4.rpm -P /tmp
+#wget https://download.elastic.co/kibana/kibana/kibana-4.6.4-x86_64.rpm -P /tmp
+#rpm --install /tmp/elasticsearch-2.4.4.rpm
+#rpm --install /tmp/kibana-4.6.4-x86_64.rpm
 
-echo "script.inline: on" >> /etc/elasticsearch/elasticsearch.yml
-echo "script.indexed: on" >> /etc/elasticsearch/elasticsearch.yml
-echo "network.host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
-echo "path.repo: /vagrant/snapshots" >> /etc/elasticsearch/elasticsearch.yml
+#echo "script.inline: on" >> /etc/elasticsearch/elasticsearch.yml
+#echo "script.indexed: on" >> /etc/elasticsearch/elasticsearch.yml
+#echo "network.host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
+#echo "path.repo: /vagrant/snapshots" >> /etc/elasticsearch/elasticsearch.yml
 
-/usr/share/elasticsearch/bin/plugin install analysis-phonetic
-/usr/share/elasticsearch/bin/plugin install analysis-icu
+#/usr/share/elasticsearch/bin/plugin install analysis-phonetic
+#/usr/share/elasticsearch/bin/plugin install analysis-icu
 
-/opt/kibana/bin/kibana plugin --install elastic/sense
+#/opt/kibana/bin/kibana plugin --install elastic/sense
 
-chkconfig elasticsearch on
-service elasticsearch start
+#chkconfig elasticsearch on
+#service elasticsearch start
 #chkconfig kibana on
 #service kibana start
 
 # Create snapshot directory.
-mkdir /vagrant/snapshots
+#mkdir /vagrant/snapshots
 
 # Elasticsearch isn't always *quite* ready. Delay to avoid curl request failing.
-sleep 5
+#sleep 5
 
 # Initialize elasticsearch snapshot repo.
-curl -XPUT "http://localhost:9200/_snapshot/magento2" -d '{"type": "fs","settings": {"location": "/vagrant/snapshots/magento2"}}'
+#curl -XPUT "http://localhost:9200/_snapshot/magento2" -d '{"type": "fs","settings": {"location": "/vagrant/snapshots/magento2"}}'
 
 # Symlink vshell utility into PATH for root and vagrant users.
 echo -e "Add vshell utility to PATH."
@@ -294,7 +299,7 @@ echo -e "\nDB:"
 echo "   User: '$DB_USER'@'%'"
 echo "   Pass: $DB_PASS"
 echo "   DBName: $DB_NAME"
-echo "   Addr: 192.168.80.80"
+echo "   Addr: 192.168.70.70"
 echo "   Port: guest 3306 -> host 3306"
 echo -e "\nWeb:"
 echo "   guest :80 -> host :80"
