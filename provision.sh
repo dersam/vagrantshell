@@ -98,7 +98,7 @@ $PHP_VERSION-pecl-mongo $PHP_VERSION-json $PHP_VERSION-intl \
 $PHP_VERSION-soap \
 mongodb mongodb-server \
 $PHP_VERSION-ioncube-loader \
-Percona-Server-client-56 Percona-Server-server-56 \
+Percona-Server-client-56 Percona-Server-server-56 Percona-Server-devel-56 \
 percona-toolkit percona-xtrabackup mysql-utilities mysqlreport mysqltuner \
 redis \
 make patch wget mysql-devel pcre-devel \
