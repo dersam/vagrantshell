@@ -45,15 +45,15 @@ Examples:
    vshell map
 ```
 
-### The `//dev` tools
+### The `//vagrant.localhost` tools
 
-Located at `https://dev` is an index of various tools configured for this box.
+Located at `https://dev.localhost` is an index of various tools configured for this box.
 It exposes the following:
-- `phpinfo()` for easy viewing [`https://dev/phpinfo.php`]
-- `sites` listing all virtual hosts installed [`https://dev/sites`]
-- `logs` directory for provisioned daemons [`https://dev/logs`]
-- [linux-dash](https://github.com/afaqurk/linux-dash) [`https://dev/linux-dash`]
-- [xhgui](https://github.com/perftools/xhgui) XHProf profiler [`https://dev/xhgui`]
+- `phpinfo()` for easy viewing [`https://vagrant.localhost/phpinfo.php`]
+- `sites` listing all virtual hosts installed [`https://vagrant.localhost/sites`]
+- `logs` directory for provisioned daemons [`https://vagrant.localhost/logs`]
+- [linux-dash](https://github.com/afaqurk/linux-dash) [`https://vagrant.localhost/linux-dash`]
+- [xhgui](https://github.com/perftools/xhgui) XHProf profiler [`https://vagrant.localhost/xhgui`]
 
 ## Technology stack
 
@@ -172,7 +172,7 @@ http://parallels.github.io/vagrant-parallels/docs/installation/
 This is necessary so that the environment can be accessed in a browser. Edit
 `/etc/hosts` to include the following line:
 
-`192.168.80.80 dev vagrant.dev develop.vagrant.dev`
+`192.168.70.70 dev vagrant.localhost develop.vagrant.localhost`
 
 On Windows, the file is located at `C:\Windows\System32\Drivers\etc\hosts`.
 
@@ -206,18 +206,18 @@ type, `sudo su`.
 
 ### Directories
 
-A default root directory of `develop.vagrant.dev` will be created in `sites`.
+A default root directory of `develop.vagrant.localhost` will be created in `sites`.
 There is a wildcard vhost entry which will serve any content within the `sites`
 directory, using the exact directory name created.
 
-By default, the server parses documents from `/vagrant/sites/develop.vagrant.dev`.
+By default, the server parses documents from `/vagrant/sites/develop.vagrant.localhost`.
 Additional sites can be created under `/vagrant/sites` to test different
 codebases. On your host machine, point your IDE or editor to
-`/your/local/path/vagrantshell/sites/develop.vagrant.dev` to make changes.
+`/your/local/path/vagrantshell/sites/develop.vagrant.localhost` to make changes.
 
 ### Access from Web browser
 
-Browse to the address at `develop.vagrant.dev` using `HTTP` or `HTTPS`. This
+Browse to the address at `develop.vagrant.localhost` using `HTTP` or `HTTPS`. This
 will work so long as the hosts file has been updated. Note that the `SPDY` /
 `HTTP2` protocol will be used.
 
@@ -225,9 +225,9 @@ will work so long as the hosts file has been updated. Note that the `SPDY` /
 
 Create a new directory in `sites`. Nginx will automatically pick up on it. A
 corresponding `/etc/hosts` entry should exist, otherwise the new directory will
-be inaccessible. For example, create a directory, `tests.vagrant.dev` or
-`foobar.dev` in `sites`, and edit
-the host's host file to include `192.168.80.80 foobar.dev`, then browse to it.
+be inaccessible. For example, create a directory, `tests.vagrant.localhost` or
+`foobar.localhost` in `sites`, and edit
+the host's host file to include `192.168.80.80 foobar.localhost`, then browse to it.
 **The directory name will be exactly what should be typed in a browser's
 address bar.**
 
