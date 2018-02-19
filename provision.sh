@@ -9,7 +9,7 @@
 PROJECT_ROOT="vagrant"
 
 # Create new project directory in sites/
-PROJECT_VHOST_DIR="phoenix.vagrant.dev"
+PROJECT_VHOST_DIR="phoenix.vagrant.localhost"
 if [[ ! -d /vagrant/sites/$PROJECT_VHOST_DIR ]]; then
 	mkdir -pv /vagrant/sites/$PROJECT_VHOST_DIR
 	cp /vagrant/sites/phpinfo.php /vagrant/sites/$PROJECT_VHOST_DIR/index.php
@@ -305,7 +305,7 @@ echo "   Group: $USER_GROUP"
 echo "   root access: 'sudo su'"
 echo "   guest :22 -> host :4444"
 echo -e "\nRemember to set /etc/hosts (or C:\Windows\System32\Drivers\etc\hosts):"
-echo "   192.168.80.80 vagrant.dev develop.vagrant.dev"
+echo "   192.168.80.80 vagrant.localhost develop.vagrant.localhost"
 echo -e "\nFor any questions: Dane MacMillan <work@danemacmillan.com>"
 echo -e "This vagrant box was provisioned using: https://github.com/danemacmillan/vagrantshell"
 echo -e "--------------------------------------------------------------------------------"
@@ -352,10 +352,10 @@ done
 
 # to change hostname
 # vi /etc/sysconfig/network
-# HOSTNAME=vagrant.dev
-# hostname vagrant.dev
+# HOSTNAME=vagrant.localhost
+# hostname vagrant.localhost
 # vi /etc/hosts
-# 192.168.80.80 develop.vagrant.dev
+# 192.168.80.80 develop.vagrant.localhost
 # /etc/init.d/network restart
 
 #to change to httpd worker
