@@ -34,7 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 		# NFS mounted with cachefilesd (FS-Cache) for performance.
 		#vagrantshell.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['rw', 'vers=3', 'tcp', 'fsc']
-		vagrantshell.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['rw', 'vers=3', 'tcp']
+		#vagrantshell.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['rw', 'vers=3', 'tcp']
 
 		# Calculate CPU and memory usage for each provider.
 		# https://stefanwrobel.com/how-to-make-vagrant-performance-not-suck
