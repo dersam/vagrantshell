@@ -49,9 +49,6 @@ if [ -f $VAGRANT_PROVISION_DONE ]; then
 	exit 0;
 fi
 
-mkdir -pv /var/log/mysql
-chown mysql:mysql /var/log/mysql
-
 # Set timezone
 mv /etc/localtime /etc/localtime.bak
 ln -nsfv /usr/share/zoneinfo/EST5EDT /etc/localtime
@@ -101,7 +98,7 @@ $PHP_VERSION-ioncube-loader \
 Percona-Server-client-56 Percona-Server-server-56 Percona-Server-devel-56 \
 percona-toolkit percona-xtrabackup mysql-utilities mysqlreport mysqltuner \
 redis \
-make patch wget mysql-devel pcre-devel \
+make patch wget pcre-devel \
 gd-devel libxml2-devel expat-devel libicu-devel bzip2-devel oniguruma-devel \
 openldap-devel readline-devel libc-client-devel libcap-devel binutils-devel \
 pam-devel elfutils-libelf-devel ImageMagick-devel libxslt-devel libevent-devel \
@@ -176,6 +173,9 @@ chmod 700 ~/.ssh
 chmod 600 ~/.ssh/*
 chmod 700 /home/$USER_USER/.ssh
 chmod 600 /home/$USER_USER/.ssh/*
+
+mkdir -pv /var/log/mysql
+chown mysql:mysql /var/log/mysql
 
 # Installing PECL Scrypt extension for PHP...
 # echo "Installing PECL Scrypt extension for PHP."
