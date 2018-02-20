@@ -8,7 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.define "vagrantshell", primary: true do |vagrantshell|
 
 		# Default box
-		vagrantshell.vm.box = "bento/centos-6.7"
+		vagrantshell.vm.box = "bento/centos-6.9"
 		#vagrantshell.vm.box_url = ""
 
 		# Default shell
@@ -59,7 +59,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 			# Provider: Parallels
 			vagrantshell.vm.provider "parallels" do |p, override|
-				override.vm.box = "parallels/centos-6.7"
+				#override.vm.box = "parallels/centos-6.7"
+				override.vm.box = "bento/centos-6.9"
 				p.memory = mem
 				p.cpus = cpus
 				p.update_guest_tools = false
