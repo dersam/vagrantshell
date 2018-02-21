@@ -56,6 +56,7 @@ ln -nsfv /usr/share/zoneinfo/EST5EDT /etc/localtime
 # Update base box
 echo "Updating current software."
 yum -y update
+yum -y install kernel-headers kernel-devel
 
 # Install missing repos
 echo "Installing repos for epel, IUS, Percona, nginx."
