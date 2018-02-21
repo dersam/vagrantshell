@@ -8,14 +8,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.define "vagrantshell", primary: true do |vagrantshell|
 
 		# Default box
-		vagrantshell.vm.box = "bento/centos-6.7"
+		vagrantshell.vm.box = "bento/centos-6.9"
 		#vagrantshell.vm.box_url = ""
 
 		# Default shell
 		#vagrantshell.ssh.shell = "/bin/bash"
 		# Until version 1.8.6 gets released" https://github.com/mitchellh/vagrant/issues/5186
-		vagrantshell.ssh.username = "vagrant"
-		vagrantshell.ssh.password = "vagrant"
+		#vagrantshell.ssh.username = "vagrant"
+		#vagrantshell.ssh.password = "vagrant"
 
 		vagrantshell.vm.hostname = "phoenix"
 		vagrantshell.vm.network :private_network, ip: "192.168.70.70"
@@ -34,7 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 		# NFS mounted with cachefilesd (FS-Cache) for performance.
 		#vagrantshell.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['rw', 'vers=3', 'tcp', 'fsc']
-		vagrantshell.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['rw', 'vers=3', 'tcp']
+		#vagrantshell.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['rw', 'vers=3', 'tcp']
 
 		# Calculate CPU and memory usage for each provider.
 		# https://stefanwrobel.com/how-to-make-vagrant-performance-not-suck
@@ -51,7 +51,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 				mem = `grep 'MemTotal' /proc/meminfo | sed -e 's/MemTotal://' -e 's/ kB//'`.to_i / 1024 / 2
 			else # Windows
 				cpus = 2
-				mem = 2048
+				mem = 4096
 			end
 
 		# Define multiple providers: https://docs.vagrantup.com/v2/providers/configuration.html
@@ -59,7 +59,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 			# Provider: Parallels
 			vagrantshell.vm.provider "parallels" do |p, override|
-				override.vm.box = "parallels/centos-6.7"
+				#override.vm.box = "parallels/centos-6.7"
+				override.vm.box = "bento/centos-6.9"
 				p.memory = mem
 				p.cpus = cpus
 				p.update_guest_tools = false
