@@ -108,7 +108,7 @@ libcurl-devel libmcrypt-devel tbb-devel libdwarf-devel
 # Install newer versions of python that can be executed directly. These will
 # not replace the system version of python, 2.6.6, which CentOS relies on
 # by default for tools like yum.
-yum -y install python27 python35u python27-pip python35u-pip
+yum -y install python27 python27-devel python27-pip python27-virtualenv python35u python35u-devel python35u-pip python35u-virtualenv
 
 # Latest version of Node.js
 curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
