@@ -64,11 +64,16 @@ yum -y install epel-release
 yum -y install https://centos6.iuscommunity.org/ius-release.rpm
 yum -y install http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
 yum -y install http://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
-#yum -y install https://repo.varnish-cache.org/redhat/varnish-4.0.el6.rpm
 yum -y install http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
 
 # Switch to mainline Nginx version in repo file.
 #sed -i -e 's/packages\/centos/packages\/mainline\/centos/g' /etc/yum.repos.d/nginx.repo
+
+# Ensure nginx's terrible default configs are blown away.
+rm -rf /etc/nginx/conf.d
+
+# Map configs into core, which include some yum repos.
+source /vagrant/bin/vshell map
 
 # Install all software needed for machine
 echo "Installing base software."
@@ -98,7 +103,7 @@ mongodb mongodb-server \
 $PHP_VERSION-ioncube-loader \
 Percona-Server-client-56 Percona-Server-server-56 Percona-Server-devel-56 \
 percona-toolkit percona-xtrabackup mysql-utilities mysqlreport mysqltuner \
-redis \
+varnish redis \
 make patch wget pcre-devel \
 gd-devel libxml2-devel expat-devel libicu-devel bzip2-devel oniguruma-devel \
 openldap-devel readline-devel libc-client-devel libcap-devel binutils-devel \
@@ -134,10 +139,8 @@ yum -y install nodejs
 # Clean yum
 yum clean all
 
-# Ensure nginx's terrible default configs are blown away.
-rm -rf /etc/nginx/conf.d
-
-# Map configs into core.
+# Map configs into core, which include some yum repos. Do this a second time,
+# in case some installations overwrote the configs.
 source /vagrant/bin/vshell map
 
 # Set SELinux to permissive mode for Nginx
