@@ -77,7 +77,7 @@ source /vagrant/bin/vshell map
 
 # Install all software needed for machine
 echo "Installing base software."
-PHP_VERSION="php70u"
+PHP_VERSION="php71u"
 
 # Smaller footprint. 66M downloaded.
 yum -y groupinstall "Development Tools"
@@ -113,7 +113,7 @@ libcurl-devel libmcrypt-devel tbb-devel libdwarf-devel
 # Install newer versions of python that can be executed directly. These will
 # not replace the system version of python, 2.6.6, which CentOS relies on
 # by default for tools like yum.
-yum -y install python27 python27-devel python27-pip python27-virtualenv python35u python35u-devel python35u-pip python35u-virtualenv
+yum -y install python27 python27-devel python27-pip python27-virtualenv python36u python36u-devel python36u-pip python36u-virtualenv
 
 # Latest version of Node.js
 curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
