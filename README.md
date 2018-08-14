@@ -45,15 +45,15 @@ Examples:
    vshell map
 ```
 
-### The `//vagrant.localhost` tools
+### The `//vagrant.test` tools
 
-Located at `https://dev.localhost` is an index of various tools configured for this box.
+Located at `https://dev.test` is an index of various tools configured for this box.
 It exposes the following:
-- `phpinfo()` for easy viewing [`https://vagrant.localhost/phpinfo.php`]
-- `sites` listing all virtual hosts installed [`https://vagrant.localhost/sites`]
-- `logs` directory for provisioned daemons [`https://vagrant.localhost/logs`]
-- [linux-dash](https://github.com/afaqurk/linux-dash) [`https://vagrant.localhost/linux-dash`]
-- [xhgui](https://github.com/perftools/xhgui) XHProf profiler [`https://vagrant.localhost/xhgui`]
+- `phpinfo()` for easy viewing [`https://vagrant.test/phpinfo.php`]
+- `sites` listing all virtual hosts installed [`https://vagrant.test/sites`]
+- `logs` directory for provisioned daemons [`https://vagrant.test/logs`]
+- [linux-dash](https://github.com/afaqurk/linux-dash) [`https://vagrant.test/linux-dash`]
+- [xhgui](https://github.com/perftools/xhgui) XHProf profiler [`https://vagrant.test/xhgui`]
 
 ## Technology stack
 
@@ -72,11 +72,11 @@ will be used, then fallback to VirtualBox. Parallels is faster, but not free.
 
 ### Major
 
-- CentOS 6.7
-- Nginx 1.9+ (mainline branch)
-- PHP 5.5+ (PHP-FPM & opcache)
+- CentOS 6.9
+- Nginx 1.15+ (mainline branch)
+- PHP 7.1+ (PHP-FPM & opcache)
 - Percona 5.6+ (MySQL)
-- Redis
+- Redis 3.2+
 - MongoDB
 - Varnish 3.0+
 - Node.js
@@ -86,7 +86,7 @@ will be used, then fallback to VirtualBox. Parallels is faster, but not free.
 ### Minor
 
 - Xdebug (read below)
-- Git 2.5+
+- Git 2.16+
 - Rsync 3.1+
 
 ### Additional
@@ -172,7 +172,7 @@ http://parallels.github.io/vagrant-parallels/docs/installation/
 This is necessary so that the environment can be accessed in a browser. Edit
 `/etc/hosts` to include the following line:
 
-`192.168.70.70 dev vagrant.localhost develop.vagrant.localhost`
+`192.168.70.70 test vagrant.test develop.vagrant.test phoenix.vagrant.test`
 
 On Windows, the file is located at `C:\Windows\System32\Drivers\etc\hosts`.
 
@@ -206,28 +206,34 @@ type, `sudo su`.
 
 ### Directories
 
-A default root directory of `develop.vagrant.localhost` will be created in `sites`.
+A default root directory of `develop.vagrant.test` will be created in `sites`.
 There is a wildcard vhost entry which will serve any content within the `sites`
 directory, using the exact directory name created.
 
-By default, the server parses documents from `/vagrant/sites/develop.vagrant.localhost`.
+By default, the server parses documents from `/vagrant/sites/develop.vagrant.test`.
 Additional sites can be created under `/vagrant/sites` to test different
 codebases. On your host machine, point your IDE or editor to
-`/your/local/path/vagrantshell/sites/develop.vagrant.localhost` to make changes.
+`/your/local/path/vagrantshell/sites/develop.vagrant.test` to make changes.
 
 ### Access from Web browser
 
-Browse to the address at `develop.vagrant.localhost` using `HTTP` or `HTTPS`. This
+Browse to the address at `develop.vagrant.test` using `HTTP` or `HTTPS`. This
 will work so long as the hosts file has been updated. Note that the `SPDY` /
 `HTTP2` protocol will be used.
+
+While the directory named after the desired domain name is where the project
+exists, the official root served by Nginx is `yourdomain.vagrant.test/current`,
+so add any public files in `current`, while any sensitive configs or other 
+server and code information can go directly underneath the 
+`yourdomain.vagrant.test` directory.
 
 ### Adding new virtual hosts
 
 Create a new directory in `sites`. Nginx will automatically pick up on it. A
 corresponding `/etc/hosts` entry should exist, otherwise the new directory will
-be inaccessible. For example, create a directory, `tests.vagrant.localhost` or
-`foobar.localhost` in `sites`, and edit
-the host's host file to include `192.168.80.80 foobar.localhost`, then browse to it.
+be inaccessible. For example, create a directory, `m2.vagrant.test` or
+`foobar.test` in `sites`, and edit
+the host's host file to include `192.168.70.70 foobar.test`, then browse to it.
 **The directory name will be exactly what should be typed in a browser's
 address bar.**
 
@@ -307,9 +313,13 @@ policy to reactivate. This blocks Nginx from being accessible. Since CentOS 6.6
 
 [Dane MacMillan](https://danemacmillan.com)
 
-[Sam Schmidt](http://dersam.net)
-
 ## Changelog
+
+### 3.1.0 (2018)
+
+All configs were updated to closely mirror the production configurations of the
+site this machine works in tandem. The configs were made proper, including
+restoring wildcard domains, adding SSL certs for `.test`.
 
 ### 3.0.0 (2017)
 
@@ -328,7 +338,7 @@ date exists, it will no longer be compatible with this version.
 
 The MIT License (MIT)
 
-Copyright (C) 2015 vagrantshell - Released under the MIT License.
+Copyright (C) 2018 vagrantshell - Released under the MIT License.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

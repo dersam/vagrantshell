@@ -1,0 +1,50 @@
+SHA1 Fingerprint=EB:75:8A:F8:DC:F0:80:92:A8:75:39:97:0A:F5:9A:E7:D2:00:B7:DC
+Certificate:
+    Data:
+        Version: 1 (0x0)
+        Serial Number: 10599018757838901350 (0x931747677cb09066)
+    Signature Algorithm: sha1WithRSAEncryption
+        Issuer: C=CA, CN=*.vagrant.test
+        Validity
+            Not Before: Aug 14 18:20:15 2018 GMT
+            Not After : Aug 11 18:20:15 2028 GMT
+        Subject: C=CA, CN=*.vagrant.test
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:a0:61:a3:1a:d1:ce:b9:02:c2:6b:50:90:f5:eb:
+                    ed:02:ce:0b:86:c8:c1:e7:da:cd:e8:21:bc:6f:05:
+                    98:cd:04:8f:50:56:b6:26:c9:a9:62:82:68:80:21:
+                    16:b4:3f:6a:c5:66:a8:b0:62:b2:1c:59:7e:c6:e6:
+                    6b:ec:84:dc:0c:d4:e2:e2:04:30:5c:c7:60:5f:b5:
+                    98:5d:2d:cb:79:83:95:bb:d2:17:94:39:d6:05:a7:
+                    05:a7:ae:0c:8c:00:b1:8d:9d:e3:65:2b:af:8b:a9:
+                    4c:33:f5:dc:f6:8d:fe:54:79:19:1f:29:c2:5d:71:
+                    c4:9b:77:eb:6f:78:f0:71:91:76:22:b3:b7:b1:13:
+                    b0:6d:cc:ae:da:16:eb:89:89:4e:f3:67:51:1c:00:
+                    b7:1c:32:ff:fc:48:b8:2f:47:21:c3:65:86:61:de:
+                    fd:93:07:1c:2a:32:9e:d0:34:fd:04:3b:7a:0b:df:
+                    41:1c:44:a1:29:06:12:53:c9:89:aa:37:05:5a:e6:
+                    81:c5:b5:22:b1:62:29:d8:4c:cb:d4:ba:68:7b:0a:
+                    e1:72:67:80:91:a0:cd:2b:2c:29:b3:a1:6d:5d:ed:
+                    19:f5:3f:a0:2b:f1:99:43:61:68:ef:8d:16:5c:5a:
+                    16:32:ea:f3:47:30:aa:49:63:5a:33:db:93:99:ab:
+                    c4:d7
+                Exponent: 65537 (0x10001)
+    Signature Algorithm: sha1WithRSAEncryption
+         39:58:c0:f8:77:ee:bc:50:5f:7e:9e:e7:7c:ef:d7:13:4e:4e:
+         23:6c:ee:5e:37:72:39:22:07:06:a8:8d:7d:34:50:2b:2b:af:
+         51:2a:4e:31:fd:b3:4c:9d:f6:9d:e7:83:bd:d9:de:93:88:3c:
+         86:ea:a3:86:7b:b4:6a:7c:45:07:7c:02:84:68:c2:cc:99:03:
+         35:f5:b8:a2:58:de:b8:af:05:e0:5d:56:5c:84:ac:65:a4:1e:
+         a5:7c:96:87:2a:27:7a:af:94:f1:22:6c:9d:90:06:e8:89:91:
+         7f:72:5e:17:94:31:20:99:32:0a:00:9c:e6:c3:9b:a5:96:88:
+         21:a4:0d:13:e6:09:b2:fd:5b:39:e5:4e:b4:e4:41:d7:31:b9:
+         bb:ed:b3:4b:f5:2b:5d:e9:3f:00:26:9d:b0:29:53:25:69:01:
+         d7:5b:94:47:7a:7c:db:a6:d5:c2:0d:10:16:ab:09:c3:b4:5d:
+         5d:1d:97:19:04:91:7d:67:06:13:ad:4f:5c:54:25:87:97:68:
+         87:f3:ae:0e:e4:76:61:1e:3a:50:79:43:fb:97:05:0d:fa:63:
+         b0:aa:07:13:5f:06:81:33:bf:90:26:8a:d3:e1:24:24:b7:f3:
+         ce:7b:cf:41:fe:0e:4a:a3:da:81:29:d1:88:e2:43:75:64:7e:
+         1e:1a:2e:d4
