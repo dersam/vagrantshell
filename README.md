@@ -74,7 +74,8 @@ will be used, then fallback to VirtualBox. Parallels is faster, but not free.
 
 - CentOS 6.9
 - Nginx 1.15+ (mainline branch)
-- PHP 7.1+ (PHP-FPM & opcache)
+- PHP 5.6+ (remi-safe) 
+- PHP 7.1+ (ius)
 - Percona 5.6+ (MySQL)
 - Redis 3.2+
 - MongoDB
@@ -222,8 +223,8 @@ will work so long as the hosts file has been updated. Note that the `SPDY` /
 `HTTP2` protocol will be used.
 
 While the directory named after the desired domain name is where the project
-exists, the official root served by Nginx is `yourdomain.vagrant.test/current`,
-so add any public files in `current`, while any sensitive configs or other 
+exists, the official root served by Nginx is `yourdomain.vagrant.test/current/pub`,
+so add any public files in `current/pub`, while any sensitive configs or other 
 server and code information can go directly underneath the 
 `yourdomain.vagrant.test` directory.
 
@@ -236,6 +237,14 @@ be inaccessible. For example, create a directory, `m2.vagrant.test` or
 the host's host file to include `192.168.70.70 foobar.test`, then browse to it.
 **The directory name will be exactly what should be typed in a browser's
 address bar.**
+
+#### PHP version switching
+
+This box supports both PHP 5.6+ and 7.1+. By default, all new domain names
+directories added under the `sites` directory will be served using PHP 7.1+. To 
+use PHP 5.6, simply ensure that the name of the domain name contains the `php56`
+string in it; for example, `php56.vagrant.test` or `develop-php56.vagrant.test`
+will both use PHP 5.6 instead of PHP 7.1. 
 
 ### Post-provision
 

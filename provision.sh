@@ -97,9 +97,8 @@ $PHP_VERSION-pecl-memcached-debuginfo $PHP_VERSION-pecl-xdebug \
 $PHP_VERSION-xml $PHP_VERSION-pdo $PHP_VERSION-fpm $PHP_VERSION-opcache \
 $PHP_VERSION-cli $PHP_VERSION-pecl-jsonc $PHP_VERSION-devel \
 $PHP_VERSION-pecl-geoip $PHP_VERSION-pecl-redis \
-$PHP_VERSION-pecl-mongo $PHP_VERSION-json $PHP_VERSION-intl \
+$PHP_VERSION-json $PHP_VERSION-intl \
 $PHP_VERSION-soap \
-mongodb mongodb-server \
 $PHP_VERSION-ioncube-loader \
 Percona-Server-client-56 Percona-Server-server-56 Percona-Server-devel-56 \
 percona-toolkit percona-xtrabackup mysql-utilities mysqlreport mysqltuner \
@@ -109,6 +108,27 @@ gd-devel libxml2-devel expat-devel libicu-devel bzip2-devel oniguruma-devel \
 openldap-devel readline-devel libc-client-devel libcap-devel binutils-devel \
 pam-devel elfutils-libelf-devel ImageMagick-devel libxslt-devel libevent-devel \
 libcurl-devel libmcrypt-devel tbb-devel libdwarf-devel
+
+# This is for remi-safe, enabled by default. All others are disabled by default.
+# Remi-safe is used in vagrantshell only for php56. This repo allows a parallel
+# installation of PHP in another version.
+yum -y install http://rpms.remirepo.net/enterprise/remi-release-6.rpm
+#Install remi-safe version of PHP 5.6.
+PHP_VERSION_REMI_SAFE="php56-php"
+yum -y install $PHP_VERSION \
+$PHP_VERSION_REMI_SAFE-devel $PHP_VERSION_REMI_SAFE-common $PHP_VERSION_REMI_SAFE-gd $PHP_VERSION_REMI_SAFE-imap \
+$PHP_VERSION_REMI_SAFE-mbstring $PHP_VERSION_REMI_SAFE-mcrypt $PHP_VERSION_REMI_SAFE-mhash \
+$PHP_VERSION_REMI_SAFE-pdo_mysql $PHP_VERSION_REMI_SAFE-pear \
+$PHP_VERSION_REMI_SAFE-pecl-xdebug \
+$PHP_VERSION_REMI_SAFE-xml $PHP_VERSION_REMI_SAFE-pdo $PHP_VERSION_REMI_SAFE-fpm $PHP_VERSION_REMI_SAFE-opcache \
+$PHP_VERSION_REMI_SAFE-cli $PHP_VERSION_REMI_SAFE-pecl-jsonc $PHP_VERSION_REMI_SAFE-devel \
+$PHP_VERSION_REMI_SAFE-pecl-geoip $PHP_VERSION_REMI_SAFE-pecl-redis \
+$PHP_VERSION_REMI_SAFE-json $PHP_VERSION_REMI_SAFE-intl \
+$PHP_VERSION_REMI_SAFE-soap \
+$PHP_VERSION_REMI_SAFE-ioncube-loader
+# These conflict with IUS.
+# $PHP_VERSION_REMI_SAFE-pecl-memcached
+# $PHP_VERSION_REMI_SAFE-pecl-memcached-debuginfo
 
 # Install newer versions of python that can be executed directly. These will
 # not replace the system version of python, 2.6.6, which CentOS relies on
@@ -199,23 +219,23 @@ echo "Adding services to boot."
 chkconfig nginx on
 chkconfig mysql on
 chkconfig php-fpm on
-chkconfig memcached on
+chkconfig php56-fpm on
+#chkconfig memcached on
 chkconfig redis on
 chkconfig iptables off
 chkconfig ip6tables off
 #chkconfig cachefilesd on
-chkconfig mongod on
 
 # Start services
 echo "Starting/stopping services."
 /etc/init.d/nginx restart
 /etc/init.d/mysql restart
 /etc/init.d/php-fpm restart
-/etc/init.d/memcached restart
+/etc/init.d/php56-fpm restart
+#/etc/init.d/memcached restart
 /etc/init.d/redis restart
 /etc/init.d/iptables stop
 /etc/init.d/ip6tables stop
-/etc/init.d/mongod restart
 
 echo "Waiting for Percona MySQL."
 while ! service mysql status | grep -q running; do
@@ -230,39 +250,6 @@ echo -e 'Updating Git.'
 yum -y replace git --replace-with git2u
 echo -e "Updating rsync."
 yum -y replace rsync --replace-with rsync31u
-
-# Install Elasticsearch and Kibana
-# Kibana not technically necessary, nice for viewing indices and figuring out config issues.
-# TODO: Setup up connection to legacy rpm repos (ES is at 5 currently)
-#yum -y install java
-#wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/rpm/elasticsearch/2.4.4/elasticsearch-2.4.4.rpm -P /tmp
-#wget https://download.elastic.co/kibana/kibana/kibana-4.6.4-x86_64.rpm -P /tmp
-#rpm --install /tmp/elasticsearch-2.4.4.rpm
-#rpm --install /tmp/kibana-4.6.4-x86_64.rpm
-
-#echo "script.inline: on" >> /etc/elasticsearch/elasticsearch.yml
-#echo "script.indexed: on" >> /etc/elasticsearch/elasticsearch.yml
-#echo "network.host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
-#echo "path.repo: /vagrant/snapshots" >> /etc/elasticsearch/elasticsearch.yml
-
-#/usr/share/elasticsearch/bin/plugin install analysis-phonetic
-#/usr/share/elasticsearch/bin/plugin install analysis-icu
-
-#/opt/kibana/bin/kibana plugin --install elastic/sense
-
-#chkconfig elasticsearch on
-#service elasticsearch start
-#chkconfig kibana on
-#service kibana start
-
-# Create snapshot directory.
-#mkdir /vagrant/snapshots
-
-# Elasticsearch isn't always *quite* ready. Delay to avoid curl request failing.
-#sleep 5
-
-# Initialize elasticsearch snapshot repo.
-#curl -XPUT "http://localhost:9200/_snapshot/magento2" -d '{"type": "fs","settings": {"location": "/vagrant/snapshots/magento2"}}'
 
 # Symlink vshell utility into PATH for root and vagrant users.
 echo -e "Add vshell utility to PATH."

@@ -62,15 +62,14 @@ vshell_restart()
 	echo -e "Reloading service configs."
 	sudo /etc/init.d/nginx restart
 	sudo /etc/init.d/php-fpm restart
+	sudo /etc/init.d/php56-php-fpm restart
 	sudo /etc/init.d/mysql restart
 	sudo /etc/init.d/redis restart
 	#sudo /etc/init.d/varnish reload
-	sudo /etc/init.d/memcached restart
-	sudo /etc/init.d/mongod restart
+#	sudo /etc/init.d/memcached restart
 	#sudo /etc/init.d/sshd reload
 	#sudo /etc/init.d/network reload
 	#sudo /etc/init.d/iptables reload
-	sudo /etc/init.d/elasticsearch restart
 }
 
 vshell_update()
