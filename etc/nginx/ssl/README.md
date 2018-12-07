@@ -19,7 +19,7 @@ generated. Be sure to create the custom vhost configurations as well.
 ```
 cd /vagrant/nginx/ssl
 openssl genrsa 2048 > newdomain.test.key
-openssl req -new -x509 -nodes -sha1 -days 3650 -key newdomain.test.key > newdomain.test.crt
+openssl req -new -x509 -nodes -sha256 -days 3650 -key newdomain.test.key > newdomain.test.crt
 ```
 
 The third command will ask for a "Common Name (e.g. server FQDN or YOUR name)"
