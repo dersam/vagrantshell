@@ -64,7 +64,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 				override.vm.box = "bento/centos-6.9"
 				p.memory = mem
 				p.cpus = cpus
-				p.update_guest_tools = false
+				p.update_guest_tools = true
 			end
 
 			# Provider: VirtualBox
