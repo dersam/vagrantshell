@@ -29,6 +29,7 @@ Options:
  update              Update vagrantshell from master.
  xdebug              Toggle PHP Xdebug on or off.
  xhprof              Toggle PHP XHProf on or off.
+ xdprofile           Toggle Xdebub Profiler on or off.
 
 Examples:
  Remap new /vagrant/etc/ files into core /etc/:
@@ -115,6 +116,21 @@ vshell_xhprof()
 	sudo /etc/init.d/php-fpm reload
 }
 
+vshell_xdprofile()
+{
+	local xdebug_location="/vagrant/etc/php.d/15-xdebug.ini"
+
+	if grep -q ";xdebug.profiler_enable" "$xdebug_location"; then
+		echo "Toggling Xdebug on."
+		sed -i -e 's/;xdebug.profiler_enable/xdebug.profiler_enable/g' ${xdebug_location}
+	else
+		echo "Toggling Xdebug off."
+		sed -i -e 's/xdebug.profiler_enable/;xdebug.profiler_enable/g' ${xdebug_location}
+	fi
+
+	sudo /etc/init.d/php-fpm reload
+}
+
 ##
 # Handle simple options (no need for getopts)
 #
@@ -142,6 +158,10 @@ fi
 
 if [[ "$1" == "xhprof" ]]; then
 	vshell_xhprof
+fi
+
+if [[ "$1" == "xdprofile" ]]; then
+	vshell_xdprofile
 fi
 
 # Default show usage help
