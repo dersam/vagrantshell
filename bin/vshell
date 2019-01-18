@@ -88,7 +88,7 @@ vshell_update()
 
 vshell_xdebug()
 {
-	local xdebug_location="/vagrant/etc/php.d/15-xdebug.ini"
+	local xdebug_location="/etc/php.d/15-xdebug.ini"
 
 	if grep -q ";zend_extension" "$xdebug_location"; then
 		echo "Toggling Xdebug on."
@@ -103,7 +103,7 @@ vshell_xdebug()
 
 vshell_xhprof()
 {
-	local xhprof_location="/vagrant/etc/php.ini"
+	local xhprof_location="/etc/php.ini"
 
 	if grep -q "auto_prepend_file\s=\/vagrant" "$xhprof_location"; then
 		echo "Toggling xhprof off."
@@ -118,7 +118,7 @@ vshell_xhprof()
 
 vshell_xdprofile()
 {
-	local xdebug_location="/vagrant/etc/php.d/15-xdebug.ini"
+	local xdebug_location="/etc/php.d/15-xdebug.ini"
 
 	if grep -q ";xdebug.profiler_enable" "$xdebug_location"; then
 		echo "Toggling Xdebug on."
