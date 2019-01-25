@@ -1,6 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-
+VAGRANT_COMMAND = ARGV[0]
 VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
@@ -11,13 +11,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		vagrantshell.vm.box = "bento/centos-6.9"
 		#vagrantshell.vm.box_url = ""
 
+		if VAGRANT_COMMAND == "ssh"
+			config.ssh.username = "#{ENV['USER']}"
+		end
 		# Default shell
 		#vagrantshell.ssh.shell = "/bin/bash"
 		# Until version 1.8.6 gets released" https://github.com/mitchellh/vagrant/issues/5186
 		#vagrantshell.ssh.username = "vagrant"
 		#vagrantshell.ssh.password = "vagrant"
 
-		vagrantshell.vm.hostname = "phoenix"
+		vagrantshell.vm.hostname = "vagrant.test"
 		vagrantshell.vm.network :private_network, ip: "192.168.70.70"
 		# MySQL
 		vagrantshell.vm.network "forwarded_port", guest: 3306, host: 3306
@@ -36,7 +39,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		# NFS mounted with cachefilesd (FS-Cache) for performance.
 		#vagrantshell.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['rw', 'vers=3', 'tcp', 'fsc']
 		vagrantshell.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['rw', 'vers=3', 'tcp', 'actimeo=2'], linux__nfs_options: ['rw','no_subtree_check','all_squash','async']
-
+		#vagrantshell.vm.synced_folder ".", "/vagrant", disabled: true
+		vagrantshell.vm.synced_folder "#{ENV['HOME']}", "/home/#{ENV['USER']}", type: "nfs", mount_options: ['rw', 'vers=3', 'tcp', 'actimeo=2'], linux__nfs_options: ['rw','no_subtree_check','all_squash','async']
 		# Calculate CPU and memory usage for each provider.
 		# https://stefanwrobel.com/how-to-make-vagrant-performance-not-suck
 
@@ -82,6 +86,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 		vagrantshell.vm.post_up_message = "vagrantshell documentation: https://github.com/danemacmillan/vagrantshell."
 
-		vagrantshell.vm.provision "shell", path: "provision.sh"
+		#agrantshell.vm.provision "shell", path: "provision.sh"
+		#vagrantshell.vm.provision "shell", path: "provision.sh", env: {"VAGRANT_PROVISION_USER" => "#{ENV['USER']}"}
+		vagrantshell.vm.provision "shell", path: "foo.sh", env: {"VAGRANT_PROVISION_USER" => "#{ENV['USER']}"}
 	end
 end

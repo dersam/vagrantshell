@@ -22,33 +22,6 @@ DB_NAME="develop"
 DB_USER="root"
 DB_PASS=""
 
-# Add vagrantshell bin to path
-#chmod -R +x /$PROJECT_ROOT/bin
-#export PATH="/$PROJECT_ROOT/bin:$PATH"
-
-# Generate provision files to prevent rebuilding every time.
-VAGRANT_PROVISION_FIRST="/$PROJECT_ROOT/tmp/vagrant-provision.first"
-VAGRANT_PROVISION_DONE="/$PROJECT_ROOT/tmp/vagrant-provision.done"
-
-# If this is a brand new VM, override provisioning.done
-if ! [ -f $VAGRANT_PROVISION_FIRST ]; then
-	rm -f $VAGRANT_PROVISION_DONE
-fi
-
-if [ -f $VAGRANT_PROVISION_DONE ]; then
-	echo -e "Box is already provisioned. Delete the $VAGRANT_PROVISION_DONE file to rebuild on vagrant up."
-
-	# for some reason the nginx daemon is not starting on boot, though
-	# it's configured to, so just boot it here.
-	echo "Restarting services."
-	/etc/init.d/nginx restart
-	/etc/init.d/php-fpm restart
-	/etc/init.d/mysql restart
-	/etc/init.d/memcached restart
-	/etc/init.d/redis restart
-	exit 0;
-fi
-
 # Set timezone
 mv /etc/localtime /etc/localtime.bak
 ln -nsfv /usr/share/zoneinfo/EST5EDT /etc/localtime
