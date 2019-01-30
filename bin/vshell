@@ -117,7 +117,7 @@ vshell_xdebug()
 
 	sudo /etc/init.d/php-fpm reload
 
-	local xdebug_location="/vagrant/opt/remi/php56/root/etc/php.d/15-xdebug.ini"
+	local xdebug_location="/opt/remi/php56/root/etc/php.d/15-xdebug.ini"
 
 	if grep -q ";zend_extension" "$xdebug_location"; then
 		echo "Toggling Xdebug on."
