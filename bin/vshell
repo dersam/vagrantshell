@@ -109,10 +109,10 @@ vshell_xdebug()
 
 	if grep -q ";zend_extension" "$xdebug_location"; then
 		echo "Toggling Xdebug on."
-		sed -i -e 's/;zend_extension/zend_extension/g' ${xdebug_location}
+		sudo sed -i -e 's/;zend_extension/zend_extension/g' ${xdebug_location}
 	else
 		echo "Toggling Xdebug off."
-		sed -i -e 's/zend_extension/;zend_extension/g' ${xdebug_location}
+		sudo sed -i -e 's/zend_extension/;zend_extension/g' ${xdebug_location}
 	fi
 
 	sudo /etc/init.d/php-fpm reload
@@ -121,10 +121,10 @@ vshell_xdebug()
 
 	if grep -q ";zend_extension" "$xdebug_location"; then
 		echo "Toggling Xdebug on."
-		sed -i -e 's/;zend_extension/zend_extension/g' ${xdebug_location}
+		sudo sed -i -e 's/;zend_extension/zend_extension/g' ${xdebug_location}
 	else
 		echo "Toggling Xdebug off."
-		sed -i -e 's/zend_extension/;zend_extension/g' ${xdebug_location}
+		sudo sed -i -e 's/zend_extension/;zend_extension/g' ${xdebug_location}
 	fi
 
 	sudo /etc/init.d/php56-php-fpm reload
