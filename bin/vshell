@@ -56,6 +56,23 @@ vshell_map()
 	# Remove all dangling symlinks
 	echo -e "Removing dangling symlinks."
 	sudo symlinks -d /etc/* &> /dev/null
+
+	local vagrantshell_opt="/vagrant/opt"
+
+	echo -e "Mapping configs into /opt/"
+	# Remap them. Handle "cp: cannot overwrite non-directory
+	# `/symlink/path' with directory `/hard/path'. Use anonymous pipes to pipe
+	# stderr only to command.
+	sudo 'cp' -vRsf --backup=numbered ${vagrantshell_opt}/* /opt 2> >(HANDLESYM=$(cut -d "\`" -f2 | cut -d "'" -f1); [ $HANDLESYM ] && echo -e "Fixing symlink: $HANDLESYM" && unlink $HANDLESYM)
+	# Run again to update unlinked content
+	sudo 'cp' -Rsf --backup=numbered ${vagrantshell_opt}/* /opt
+
+	# Clean up any backups that are just symlinks.
+	sudo find /opt/ -type l -name "*.~[1-9]~" -exec unlink {} \;
+
+	# Remove all dangling symlinks
+	echo -e "Removing dangling symlinks."
+	sudo symlinks -d /opt/* &> /dev/null
 }
 
 vshell_restart()
@@ -92,13 +109,25 @@ vshell_xdebug()
 
 	if grep -q ";zend_extension" "$xdebug_location"; then
 		echo "Toggling Xdebug on."
-		sed -i -e 's/;zend_extension/zend_extension/g' ${xdebug_location}
+		sudo sed -i -e 's/;zend_extension/zend_extension/g' ${xdebug_location}
 	else
 		echo "Toggling Xdebug off."
-		sed -i -e 's/zend_extension/;zend_extension/g' ${xdebug_location}
+		sudo sed -i -e 's/zend_extension/;zend_extension/g' ${xdebug_location}
 	fi
 
 	sudo /etc/init.d/php-fpm reload
+
+	local xdebug_location="/opt/remi/php56/root/etc/php.d/15-xdebug.ini"
+
+	if grep -q ";zend_extension" "$xdebug_location"; then
+		echo "Toggling Xdebug on."
+		sudo sed -i -e 's/;zend_extension/zend_extension/g' ${xdebug_location}
+	else
+		echo "Toggling Xdebug off."
+		sudo sed -i -e 's/zend_extension/;zend_extension/g' ${xdebug_location}
+	fi
+
+	sudo /etc/init.d/php56-php-fpm reload
 }
 
 vshell_xhprof()
@@ -121,10 +150,10 @@ vshell_xdprofile()
 	local xdebug_location="/etc/php.d/15-xdebug.ini"
 
 	if grep -q ";xdebug.profiler_enable" "$xdebug_location"; then
-		echo "Toggling Xdebug on."
+		echo "Toggling Xdebug Profiler on."
 		sed -i -e 's/;xdebug.profiler_enable/xdebug.profiler_enable/g' ${xdebug_location}
 	else
-		echo "Toggling Xdebug off."
+		echo "Toggling Xdebug Profiler off."
 		sed -i -e 's/xdebug.profiler_enable/;xdebug.profiler_enable/g' ${xdebug_location}
 	fi
 
