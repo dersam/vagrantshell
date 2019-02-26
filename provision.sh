@@ -225,15 +225,15 @@ echo -e "Updating rsync."
 yum -y replace rsync --replace-with rsync31u
 
 # Symlink vshell utility into PATH for root and vagrant users.
-echo -e "Add vshell utility to PATH."
-if [[ ! -d "$HOME/bin" ]]; then
-	mkdir -pv "$HOME/bin"
+echo -e "Symlink vshell utility into a PATH."
+if [[ ! -d "$HOME/.local/bin" ]]; then
+	mkdir -pv "$HOME/.local/bin"
 fi
-ln -s /vagrant/bin/vshell $HOME/bin
-if [[ ! -d "/home/$USER_USER/bin" ]]; then
-	mkdir -pv "/home/$USER_USER/bin"
+ln -s /vagrant/bin/vshell $HOME/.local/bin
+if [[ ! -d "/home/$USER_USER/.local/bin" ]]; then
+	mkdir -pv "/home/$USER_USER/.local/bin"
 fi
-ln -s /vagrant/bin/vshell /home/$USER_USER/bin
+ln -s /vagrant/bin/vshell /home/$USER_USER/.local/bin
 
 # Set permissions on regular user.
 echo -e "Setting permissions for $USER_USER:$USER_GROUP on /home/$USER_USER"
